@@ -6,10 +6,10 @@ const TodoItem = ({ todo, onToggle, onRemove }) => {
       <input
         type="checkbox"
         onClick={() => onToggle(todo.id)}
-        checked={todo.done}
+        checked={todo.checked}
         readOnly={true}
       />
-      <span style={{ textDecoration: todo.done ? 'line-through' : ' none' }}>
+      <span style={{ textDecoration: todo.checked ? 'line-through' : ' none' }}>
         {todo.text}
       </span>
       <button onClick={() => onRemove(todo.id)}>삭제</button>

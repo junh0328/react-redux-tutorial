@@ -17,7 +17,7 @@ let id = 3; // insert가 호출될 때마다 1씩 더해집니다.
 export const insert = createAction(INSERT, (text) => ({
   id: id++,
   text,
-  done: false,
+  checked: false,
 }));
 
 export const toggle = createAction(TOGGLE, (id) => id);
@@ -25,18 +25,18 @@ export const toggle = createAction(TOGGLE, (id) => id);
 export const remove = createAction(REMOVE, (id) => id);
 
 // 초기값
-const initialStte = {
+const initialState = {
   input: '',
   todos: [
     {
       id: 1,
       text: '리덕스 기초 배우기',
-      done: true,
+      checked: true,
     },
     {
       id: 2,
       text: '리액트와 리덕스 사용하기',
-      done: false,
+      checked: false,
     },
   ],
 };
@@ -52,7 +52,7 @@ const todos = handleActions(
     [TOGGLE]: (state, { payload: id }) => ({
       ...state,
       todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo,
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
       ),
     }),
     [REMOVE]: (state, { payload: id }) => ({
@@ -60,7 +60,7 @@ const todos = handleActions(
       todos: state.todos.filter((todo) => todo.id !== id),
     }),
   },
-  initialStte,
+  initialState,
 );
 
 // 리듀서를 사용하여 해당 counter.js를 연결하기 위해서는 connect 작업이 필요하지만, redux-actions를 사용하여 handleActions로 나타냈기 때문에 그럴 필요가 없다.
